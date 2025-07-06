@@ -17,7 +17,6 @@ class RegistroClienteFragment : Fragment() {
     private var _binding: FragmentRegistroClienteBinding? = null
     private val binding get() = _binding!!
 
-    // Inicializamos el ViewModel
     private val registroViewModel: RegistroClienteViewModel by viewModels()
 
     override fun onCreateView(
@@ -42,7 +41,6 @@ class RegistroClienteFragment : Fragment() {
             val password = binding.txtPasswordCliente.text.toString().trim()
 
             if (nombre.isNotEmpty() && apellido.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                // Llamamos a la función del ViewModel
                 registroViewModel.registrarCliente(nombre, apellido, email, password)
             } else {
                 Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
@@ -55,18 +53,18 @@ class RegistroClienteFragment : Fragment() {
     }
 
     private fun setupViewModelObservers() {
-        // Observamos el LiveData del ViewModel
+        // Observador para el registro exitoso
         registroViewModel.registroStatus.observe(viewLifecycleOwner) { response ->
             response?.let {
-                if (it.success) {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                    // Si el registro es exitoso, navegamos a la pantalla de Login
-                    findNavController().navigate(R.id.action_registroClienteFragment_to_loginFragment)
-                } else {
-                    // Si no, mostramos el mensaje de error de la API
-                    Toast.makeText(requireContext(), "Error: ${it.message}", Toast.LENGTH_LONG).show()
-                }
+                // Si la respuesta no es nula, el registro fue exitoso
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.action_registroClienteFragment_to_loginFragment)
             }
+        }
+
+        // Observador para los errores
+        registroViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
         }
     }
 
