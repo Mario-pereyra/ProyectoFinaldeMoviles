@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-
+    implementation(kotlin("stdlib"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

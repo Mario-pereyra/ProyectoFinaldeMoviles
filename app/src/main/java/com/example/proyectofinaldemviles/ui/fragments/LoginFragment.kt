@@ -57,7 +57,7 @@ class LoginFragment : Fragment() {
         loginViewModel.loginStatus.observe(viewLifecycleOwner) { response ->
             response?.let {
                 // Si la API devuelve un token, el login fue exitoso
-                if (!it.accessToken.isNullOrEmpty()) {
+                if (!it.accessToken.isNullOrEmpty() ) {
                     Toast.makeText(requireContext(), "Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show()
                     // Navegamos a la siguiente pantalla (usamos DetailFragment como ejemplo)
                     findNavController().navigate(R.id.action_loginFragment_to_detailFragment)
