@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registroClienteFragment"
             app:destination="@id/registroClienteFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 
 </navigation>
