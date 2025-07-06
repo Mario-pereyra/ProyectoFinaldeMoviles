@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.proyectofinaldemviles.R // Importa el R de tu proyecto
+import com.example.proyectofinaldemviles.R
 
 import com.example.proyectofinaldemviles.databinding.FragmentHomeBinding
 
