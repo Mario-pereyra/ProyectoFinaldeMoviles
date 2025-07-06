@@ -1,7 +1,5 @@
 package com.example.proyectofinaldemviles.ui.fragments
 
-
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.proyectofinaldemviles.R
-
 import com.example.proyectofinaldemviles.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -27,10 +24,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupEventListeners()
+    }
 
+    private fun setupEventListeners() {
         binding.btnIrADetalle.setOnClickListener {
-            // Usamos la acción definida en nav_graph.xml para navegar
             findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+        }
+
+        // Modificamos el botón para que vaya a Login en lugar de a Registro directamente
+        binding.btnIrARegistro.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
     }
 

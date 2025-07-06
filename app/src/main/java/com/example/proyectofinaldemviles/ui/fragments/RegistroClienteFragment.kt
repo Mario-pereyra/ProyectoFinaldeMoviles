@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.proyectofinaldemviles.R
 import com.example.proyectofinaldemviles.databinding.FragmentRegistroClienteBinding
 
 class RegistroClienteFragment : Fragment() {
@@ -44,7 +46,7 @@ class RegistroClienteFragment : Fragment() {
         binding.lblIniciarSesion.setOnClickListener {
             Toast.makeText(requireContext(), "Navegando a Iniciar Sesión...", Toast.LENGTH_SHORT).show()
             // Aquí iría la navegación al fragment de Login, por ejemplo:
-            // findNavController().navigate(R.id.action_registroClienteFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_registroClienteFragment_to_loginFragment)
         }
     }
 

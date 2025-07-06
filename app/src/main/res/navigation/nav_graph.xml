@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
@@ -20,5 +23,25 @@
         android:name="com.example.proyectofinaldemviles.ui.fragments.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
+
+    <fragment
+        android:id="@+id/registroClienteFragment"
+        android:name="com.example.proyectofinaldemviles.ui.fragments.RegistroClienteFragment"
+        android:label="fragment_registro_cliente"
+        tools:layout="@layout/fragment_registro_cliente" >
+        <action
+            android:id="@+id/action_registroClienteFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.proyectofinaldemviles.ui.fragments.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registroClienteFragment"
+            app:destination="@id/registroClienteFragment" />
+    </fragment>
 
 </navigation>
