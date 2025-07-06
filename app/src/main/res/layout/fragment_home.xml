@@ -4,28 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.HomeFragment">
+    tools:context=".ui.fragments.HomeFragment"
+    android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnIrADetalle"
+    <TextView
+        android:id="@+id/lblTituloApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ir a Detalle"
-        app:layout_constraintBottom_toTopOf="@+id/btnIrARegistro"
+        android:text="ChambaYa!"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnIniciarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/btnIrARegistro"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Iniciar sesión"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegistrarse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblTituloApp" />
+
+    <Button
+        android:id="@+id/btnRegistrarse"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Ir a Registro"
+        android:text="Registrarse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIrADetalle" />
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,13 +28,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupEventListeners() {
-        binding.btnIrADetalle.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+        binding.btnIniciarSesion.setOnClickListener {
+            // Navega al fragment de Login
+            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
 
-        // Modificamos el botón para que vaya a Login en lugar de a Registro directamente
-        binding.btnIrARegistro.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+        binding.btnRegistrarse.setOnClickListener {
+            // Navega al fragment de Registro
+            findNavController().navigate(R.id.action_homeFragment_to_registroClienteFragment)
         }
     }
 
