@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 // Modelo para la respuesta de registro exitoso
 data class RegistroResponse(
     @SerializedName("message")
-    val message: String,
+    val message: String?,
 
     @SerializedName("user")
     val user: UserRegistered

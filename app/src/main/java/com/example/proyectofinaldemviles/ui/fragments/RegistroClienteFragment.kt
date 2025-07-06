@@ -57,14 +57,19 @@ class RegistroClienteFragment : Fragment() {
         registroViewModel.registroStatus.observe(viewLifecycleOwner) { response ->
             response?.let {
                 // Si la respuesta no es nula, el registro fue exitoso
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                if (!it.message.isNullOrBlank()) {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
                 findNavController().navigate(R.id.action_registroClienteFragment_to_loginFragment)
             }
         }
 
         // Observador para los errores
         registroViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
-            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+            // Solo muestra el Toast si el mensaje de error no es nulo ni está vacío
+            if (!errorMessage.isNullOrBlank()) {
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
