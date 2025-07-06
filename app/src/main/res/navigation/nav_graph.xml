@@ -12,10 +12,13 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/registroClienteFragment" />
+            app:destination="@id/detailFragment" />
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_registroClienteFragment"
+            app:destination="@id/registroClienteFragment" />
     </fragment>
 
     <fragment

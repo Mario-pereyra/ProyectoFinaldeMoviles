@@ -29,12 +29,11 @@ class HomeFragment : Fragment() {
 
     private fun setupEventListeners() {
         binding.btnIniciarSesion.setOnClickListener {
-            // Navega al fragment de Login
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
 
+        // Usar el ID correcto del botón
         binding.btnRegistrarse.setOnClickListener {
-            // Navega al fragment de Registro
             findNavController().navigate(R.id.action_homeFragment_to_registroClienteFragment)
         }
     }
