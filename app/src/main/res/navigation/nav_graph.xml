@@ -51,9 +51,23 @@
     </fragment>
 
     <fragment
+        android:id="@+id/trabajadorListFragment"
+        android:name="com.example.proyectofinaldemviles.ui.fragments.TrabajadorListFragment"
+        android:label="Lista de Trabajadores"
+        tools:layout="@layout/fragment_trabajador_list">
+        <argument
+            android:name="categoriaId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
         android:id="@+id/categoriasFragment"
         android:name="com.example.proyectofinaldemviles.ui.fragments.CategoriasFragment"
         android:label="fragment_categorias"
-        tools:layout="@layout/fragment_categorias" />
+        tools:layout="@layout/fragment_categorias">
+        <action
+            android:id="@+id/action_categoriasFragment_to_trabajadorListFragment"
+            app:destination="@id/trabajadorListFragment" />
+    </fragment>
 
 </navigation>

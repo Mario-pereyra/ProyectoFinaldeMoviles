@@ -5,9 +5,11 @@ import com.example.proyectofinaldemviles.models.LoginRequest
 import com.example.proyectofinaldemviles.models.LoginResponse
 import com.example.proyectofinaldemviles.models.RegistroRequest
 import com.example.proyectofinaldemviles.models.RegistroResponse
+import com.example.proyectofinaldemviles.models.Trabajador
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ChambaApi {
     @POST("client/login")
@@ -18,4 +20,7 @@ interface ChambaApi {
 
     @GET("categories")
     suspend fun getCategorias(): List<Categoria>
+
+    @GET("categories/{id}/workers")
+    suspend fun getTrabajadoresPorCategoria(@Path("id") categoryId: Int): List<Trabajador>
 }

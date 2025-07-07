@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectofinaldemviles.R
 import com.example.proyectofinaldemviles.models.Categoria
 
-class CategoriaAdapter(private var categorias: List<Categoria>) : RecyclerView.Adapter<CategoriaAdapter.CategoriaViewHolder>() {
+class CategoriaAdapter(
+    private var categorias: List<Categoria>,
+    private val onItemClick: (Categoria) -> Unit
+) : RecyclerView.Adapter<CategoriaAdapter.CategoriaViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriaViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.categoria_item, parent, false)
@@ -16,7 +19,7 @@ class CategoriaAdapter(private var categorias: List<Categoria>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: CategoriaViewHolder, position: Int) {
-        holder.bind(categorias[position])
+        holder.bind(categorias[position], onItemClick)
     }
 
     override fun getItemCount(): Int = categorias.size
@@ -28,9 +31,9 @@ class CategoriaAdapter(private var categorias: List<Categoria>) : RecyclerView.A
 
     class CategoriaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val txtNombreCategoria: TextView = itemView.findViewById(R.id.txtNombreCategoria)
-        fun bind(categoria: Categoria) {
+        fun bind(categoria: Categoria, onItemClick: (Categoria) -> Unit) {
             txtNombreCategoria.text = categoria.name
+            itemView.setOnClickListener { onItemClick(categoria) }
         }
     }
 }
-

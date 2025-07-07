@@ -49,9 +49,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     // ViewModel y LiveData KTX
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.fragment.ktx) // Necesario para by viewModels()
+
+
 
     // Retrofit y Gson Converter
     implementation(libs.retrofit)
@@ -65,6 +64,11 @@ dependencies {
     // Navigation Component
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.fragment.ktx) // Necesario para by viewModels()
+
+    //Glide para carga de imágenes
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyectofinaldemviles.databinding.FragmentCategoriasBinding
 import com.example.proyectofinaldemviles.ui.adapters.CategoriaAdapter
@@ -37,7 +38,12 @@ class CategoriasFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        categoriaAdapter = CategoriaAdapter(emptyList())
+        categoriaAdapter = CategoriaAdapter(emptyList()) { categoria ->
+            val action = CategoriasFragmentDirections.actionCategoriasFragmentToTrabajadorListFragment(categoria.id)
+            requireActivity().runOnUiThread {
+                binding.root.findNavController().navigate(action)
+            }
+        }
         binding.recyclerCategorias.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = categoriaAdapter
@@ -73,4 +79,3 @@ class CategoriasFragment : Fragment() {
         _binding = null
     }
 }
-
