@@ -1,5 +1,7 @@
 package com.example.proyectofinaldemviles.viewmodels
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,12 +25,17 @@ class LoginViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun iniciarSesion(email: String, password: String) {
+    fun iniciarSesion(context: Context, email: String, password: String) {
         viewModelScope.launch {
             _isLoading.postValue(true)
             try {
                 val request = LoginRequest(email, password)
                 val response = repository.iniciarSesion(request)
+                // Guardar el token en SharedPreferences
+                response.accessToken?.let { token ->
+                    val prefs: SharedPreferences = context.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+                    prefs.edit().putString("access_token", token).apply()
+                }
                 _loginStatus.postValue(response)
                 _error.postValue(null)
             } catch (e: HttpException) {

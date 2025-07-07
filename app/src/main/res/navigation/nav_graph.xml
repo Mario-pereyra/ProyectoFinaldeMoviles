@@ -46,8 +46,14 @@
             android:id="@+id/action_loginFragment_to_registroClienteFragment"
             app:destination="@id/registroClienteFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_loginFragment_to_categoriasFragment"
+            app:destination="@id/categoriasFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/categoriasFragment"
+        android:name="com.example.proyectofinaldemviles.ui.fragments.CategoriasFragment"
+        android:label="fragment_categorias"
+        tools:layout="@layout/fragment_categorias" />
 
 </navigation>

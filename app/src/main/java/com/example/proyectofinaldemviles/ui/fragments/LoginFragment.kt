@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
             }
 
             if (isValid) {
-                loginViewModel.iniciarSesion(email, password)
+                loginViewModel.iniciarSesion(requireContext(), email, password)
             }
         }
 
@@ -78,7 +78,7 @@ class LoginFragment : Fragment() {
             response?.let {
                 if (!it.accessToken.isNullOrEmpty()) {
                     Toast.makeText(requireContext(), "¡Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_loginFragment_to_detailFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_categoriasFragment)
                 } else {
                     // Este caso puede no ser necesario si el error se maneja por separado
                 }
