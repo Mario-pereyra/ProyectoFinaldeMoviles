@@ -1,4 +1,4 @@
-package com.example.proyectofinaldemviles.viewmodels
+package com.example.proyectofinaldemoviles.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,6 +16,9 @@ class LoginViewModel : ViewModel() {
     private val _loginStatus = MutableLiveData<LoginResponse?>()
     val loginStatus: LiveData<LoginResponse?> = _loginStatus
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
+
     fun iniciarSesion(email: String, contrasena: String) {
         viewModelScope.launch {
             try {
@@ -23,9 +26,7 @@ class LoginViewModel : ViewModel() {
                 val response = repository.iniciarSesion(request)
                 _loginStatus.postValue(response)
             } catch (e: Exception) {
-                // En caso de error (ej. sin conexión), enviamos null.
-                // El Fragmento manejará este caso.
-                _loginStatus.postValue(null)
+                _error.postValue("Error en el inicio de sesión: ${e.message}")
             }
         }
     }

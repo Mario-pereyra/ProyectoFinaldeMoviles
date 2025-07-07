@@ -1,12 +1,11 @@
-package com.example.proyectofinaldemviles.repository
+package com.example.proyectofinaldemoviles.repository
 
 import com.example.proyectofinaldemviles.api.ChambaApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitRepository {
-
-    // Reemplaza esta URL con la URL base de tu API
+    // URL Base de la API
     private const val BASE_URL = "http://trabajos.jmacboy.com/api/"
 
     private val retrofit = Retrofit.Builder()

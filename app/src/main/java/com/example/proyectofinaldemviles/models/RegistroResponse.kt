@@ -1,24 +1,16 @@
 package com.example.proyectofinaldemviles.models
 
-import com.google.gson.annotations.SerializedName
-
-// Modelo para la respuesta de registro exitoso
+// Respuesta del Registro
 data class RegistroResponse(
-    @SerializedName("message")
-    val message: String?,
-
-    @SerializedName("user")
-    val user: UserRegistered
+    val id: Int,
+    val name: String,
+    val email: String,
+    val profile: Profile
 )
 
-// Modelo para el objeto de usuario anidado en la respuesta
-data class UserRegistered(
+data class Profile(
+    val id: Int,
     val name: String,
-    val lastName: String,
-    val email: String,
-    @SerializedName("updated_at")
-    val updatedAt: String,
-    @SerializedName("created_at")
-    val createdAt: String,
-    val id: Int
+    val last_name: String,
+    val type: Int
 )
