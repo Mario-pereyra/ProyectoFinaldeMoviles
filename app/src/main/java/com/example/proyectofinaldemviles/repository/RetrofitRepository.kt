@@ -1,17 +1,20 @@
 package com.example.proyectofinaldemoviles.repository
 
-import com.example.proyectofinaldemviles.api.ChambaApi
+import com.example.proyectofinaldemviles.network.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitRepository {
-    // URL Base de la API
     private const val BASE_URL = "http://trabajos.jmacboy.com/api/"
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    private val retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
-    val api: ChambaApi = retrofit.create(ChambaApi::class.java)
+    val api: ApiService by lazy {
+        retrofit.create(ApiService::class.java)
+    }
 }

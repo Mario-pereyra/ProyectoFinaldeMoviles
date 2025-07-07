@@ -17,7 +17,6 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    // Inicializamos el ViewModel
     private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
@@ -40,7 +39,6 @@ class LoginFragment : Fragment() {
             val password = binding.txtPasswordLogin.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                // Llamamos a la función del ViewModel en lugar de mostrar un Toast
                 loginViewModel.iniciarSesion(email, password)
             } else {
                 Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
@@ -53,18 +51,20 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupViewModelObservers() {
-        // Observamos el LiveData del ViewModel
         loginViewModel.loginStatus.observe(viewLifecycleOwner) { response ->
             response?.let {
-                // Si la API devuelve un token, el login fue exitoso
-                if (!it.accessToken.isNullOrEmpty() ) {
-                    Toast.makeText(requireContext(), "Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show()
-                    // Navegamos a la siguiente pantalla (usamos DetailFragment como ejemplo)
+                if (!it.accessToken.isNullOrEmpty()) {
+                    Toast.makeText(requireContext(), "¡Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_loginFragment_to_detailFragment)
                 } else {
-                    // Si no, mostramos un mensaje de error
-                    Toast.makeText(requireContext(), "Error: Email o contraseña incorrectos", Toast.LENGTH_LONG).show()
+                    // Este caso puede no ser necesario si el error se maneja por separado
                 }
+            }
+        }
+
+        loginViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            if (!errorMessage.isNullOrBlank()) {
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.proyectofinaldemoviles.viewmodels
+package com.example.proyectofinaldemviles.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,16 +16,18 @@ class LoginViewModel : ViewModel() {
     private val _loginStatus = MutableLiveData<LoginResponse?>()
     val loginStatus: LiveData<LoginResponse?> = _loginStatus
 
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> = _error
 
-    fun iniciarSesion(email: String, contrasena: String) {
+    fun iniciarSesion(email: String, password: String) {
         viewModelScope.launch {
             try {
-                val request = LoginRequest(email, contrasena)
+                val request = LoginRequest(email, password)
                 val response = repository.iniciarSesion(request)
                 _loginStatus.postValue(response)
+                _error.postValue(null) // Limpiar errores previos
             } catch (e: Exception) {
+                _loginStatus.postValue(null) // Indicar que el login falló
                 _error.postValue("Error en el inicio de sesión: ${e.message}")
             }
         }

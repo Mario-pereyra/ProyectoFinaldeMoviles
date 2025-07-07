@@ -1,4 +1,4 @@
-package com.example.proyectofinaldemoviles.viewmodels
+package com.example.proyectofinaldemviles.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,16 +16,18 @@ class RegistroClienteViewModel : ViewModel() {
     private val _registroStatus = MutableLiveData<RegistroResponse?>()
     val registroStatus: LiveData<RegistroResponse?> = _registroStatus
 
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> = _error
 
-    fun registrarCliente(nombre: String, apellido: String, email: String, contrasena: String) {
+    fun registrarCliente(nombre: String, apellido: String, email: String, password: String) {
         viewModelScope.launch {
             try {
-                val request = RegistroRequest(nombre, apellido, email, contrasena)
+                val request = RegistroRequest(nombre, apellido, email, password)
                 val response = repository.registrarCliente(request)
                 _registroStatus.postValue(response)
+                _error.postValue(null)
             } catch (e: Exception) {
+                _registroStatus.postValue(null)
                 _error.postValue("Error en el registro: ${e.message}")
             }
         }

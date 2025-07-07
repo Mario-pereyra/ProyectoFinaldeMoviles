@@ -48,6 +48,11 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    // ViewModel y LiveData KTX
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.fragment.ktx) // Necesario para by viewModels()
+
     // Retrofit y Gson Converter
     implementation(libs.retrofit)
     implementation(libs.retrofit2.converter.gson)
