@@ -40,10 +40,49 @@ class RegistroClienteFragment : Fragment() {
             val email = binding.txtEmailCliente.text.toString().trim()
             val password = binding.txtPasswordCliente.text.toString().trim()
 
-            if (nombre.isNotEmpty() && apellido.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                registroViewModel.registrarCliente(nombre, apellido, email, password)
+            var isValid = true
+            val emailPattern = android.util.Patterns.EMAIL_ADDRESS
+
+            // Validación de nombre
+            if (nombre.isEmpty()) {
+                binding.tilNombreCliente.error = "El nombre es obligatorio"
+                isValid = false
             } else {
-                Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                binding.tilNombreCliente.error = null
+            }
+
+            // Validación de apellido
+            if (apellido.isEmpty()) {
+                binding.tilApellidoCliente.error = "El apellido es obligatorio"
+                isValid = false
+            } else {
+                binding.tilApellidoCliente.error = null
+            }
+
+            // Validación de email
+            if (email.isEmpty()) {
+                binding.tilEmailCliente.error = "El email es obligatorio"
+                isValid = false
+            } else if (!emailPattern.matcher(email).matches()) {
+                binding.tilEmailCliente.error = "Formato de email inválido"
+                isValid = false
+            } else {
+                binding.tilEmailCliente.error = null
+            }
+
+            // Validación de contraseña
+            if (password.isEmpty()) {
+                binding.tilPasswordCliente.error = "La contraseña es obligatoria"
+                isValid = false
+            } else if (password.length < 6) {
+                binding.tilPasswordCliente.error = "Mínimo 6 caracteres"
+                isValid = false
+            } else {
+                binding.tilPasswordCliente.error = null
+            }
+
+            if (isValid) {
+                registroViewModel.registrarCliente(nombre, apellido, email, password)
             }
         }
 
@@ -53,21 +92,19 @@ class RegistroClienteFragment : Fragment() {
     }
 
     private fun setupViewModelObservers() {
-        // Observador para el registro exitoso
         registroViewModel.registroStatus.observe(viewLifecycleOwner) { response ->
             response?.let {
-                // Si la respuesta no es nula, el registro fue exitoso
                 Toast.makeText(requireContext(), "Registro exitoso para ${it.name}", Toast.LENGTH_LONG).show()
                 findNavController().navigate(R.id.action_registroClienteFragment_to_loginFragment)
             }
         }
-
-        // Observador para los errores
-        registroViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
-            // Solo muestra el Toast si el mensaje de error no es nulo ni está vacío
-            if (!errorMessage.isNullOrBlank()) {
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+        registroViewModel.error.observe(viewLifecycleOwner) { errorMsg ->
+            if (!errorMsg.isNullOrBlank()) {
+                Toast.makeText(requireContext(), errorMsg, Toast.LENGTH_LONG).show()
             }
+        }
+        registroViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBarRegistro.visibility = if (isLoading == true) View.VISIBLE else View.GONE
         }
     }
 

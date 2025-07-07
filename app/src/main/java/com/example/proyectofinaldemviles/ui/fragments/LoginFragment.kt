@@ -38,10 +38,33 @@ class LoginFragment : Fragment() {
             val email = binding.txtEmailLogin.text.toString().trim()
             val password = binding.txtPasswordLogin.text.toString().trim()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                loginViewModel.iniciarSesion(email, password)
+            var isValid = true
+            val emailPattern = android.util.Patterns.EMAIL_ADDRESS
+
+            // Validación de email
+            if (email.isEmpty()) {
+                binding.tilEmailLogin.error = "El email es obligatorio"
+                isValid = false
+            } else if (!emailPattern.matcher(email).matches()) {
+                binding.tilEmailLogin.error = "Formato de email inválido"
+                isValid = false
             } else {
-                Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                binding.tilEmailLogin.error = null
+            }
+
+            // Validación de contraseña
+            if (password.isEmpty()) {
+                binding.tilPasswordLogin.error = "La contraseña es obligatoria"
+                isValid = false
+            } else if (password.length < 6) {
+                binding.tilPasswordLogin.error = "Mínimo 6 caracteres"
+                isValid = false
+            } else {
+                binding.tilPasswordLogin.error = null
+            }
+
+            if (isValid) {
+                loginViewModel.iniciarSesion(email, password)
             }
         }
 
@@ -66,6 +89,9 @@ class LoginFragment : Fragment() {
             if (!errorMessage.isNullOrBlank()) {
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
             }
+        }
+        loginViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBarLogin.visibility = if (isLoading == true) View.VISIBLE else View.GONE
         }
     }
 
