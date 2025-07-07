@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Proyecto Final de Móviles</string>
+    <string name="dialog_accept_button">Aceptar</string>
 </resources>
